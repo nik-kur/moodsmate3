@@ -24,6 +24,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = NotificationManager.shared
         application.registerForRemoteNotifications()
         
+        if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
+                   // App was launched from a push notification
+                   PushNotificationHandler.shared.handleAppLaunchFromNotification(userInfo: userInfo)
+               }
+        
         return true
     }
     
@@ -41,6 +46,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register for remote notifications: \(error.localizedDescription)")
+    }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        // Handle the notification
+        PushNotificationHandler.shared.handleAppLaunchFromNotification(userInfo: userInfo)
+        
+        // Complete the background fetch
+        completionHandler(.newData)
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Check for any pending weekly reviews from previous app launches
+        PushNotificationHandler.shared.checkForPendingReviewOnLaunch()
     }
 }
 
