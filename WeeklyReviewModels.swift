@@ -492,3 +492,79 @@ class WeeklyReviewManager: ObservableObject {
             }
     }
 }
+// Add this extension to your WeeklyReviewModels.swift file
+
+extension WeeklyReviewManager {
+    /// Performs comprehensive validation on a WeeklyReview to ensure all critical data is present and valid
+    func isWeeklyReviewValid(_ review: WeeklyReview?) -> Bool {
+        guard let review = review else {
+            print("❌ Review validation failed: Review is nil")
+            return false
+        }
+        
+        // 1. Check basic date range validity
+        guard review.weekStartDate < review.weekEndDate else {
+            print("❌ Review validation failed: Invalid date range - start: \(review.weekStartDate), end: \(review.weekEndDate)")
+            return false
+        }
+        
+        // 2. Check ID validity
+        guard review.id != UUID(uuidString: "00000000-0000-0000-0000-000000000000") else {
+            print("❌ Review validation failed: Invalid UUID")
+            return false
+        }
+        
+        // 3. Check mood summary data
+        guard isValidMoodSummary(review.moodSummary) else {
+            print("❌ Review validation failed: Invalid mood summary data")
+            return false
+        }
+        
+        // 4. Verify highlights structure
+        // Note: Empty highlights array is allowed, but if entries exist, they should be valid
+        if !review.highlights.isEmpty {
+            for (index, highlight) in review.highlights.enumerated() {
+                guard highlight.date <= Date(),  // Date should be in the past or present
+                      highlight.moodLevel >= 0 && highlight.moodLevel <= 10,  // Valid mood range
+                      highlight.id != nil  // Must have an ID
+                else {
+                    print("❌ Review validation failed: Invalid highlight at index \(index)")
+                    return false
+                }
+            }
+        }
+        
+        // All checks passed
+        print("✅ Review validation passed for review ID: \(review.id)")
+        return true
+    }
+    
+    /// Helper function to validate the mood summary section of a weekly review
+    private func isValidMoodSummary(_ summary: WeeklyReview.MoodSummary) -> Bool {
+        // Check for valid mood values
+        guard summary.averageMood >= 0 && summary.averageMood <= 10,
+              summary.highestMood >= 0 && summary.highestMood <= 10,
+              summary.lowestMood >= 0 && summary.lowestMood <= 10,
+              summary.bestDay <= Date()  // Best day should be in the past or present
+        else {
+            return false
+        }
+        
+        // Check for logical mood relationships
+        guard summary.highestMood >= summary.averageMood,
+              summary.averageMood >= summary.lowestMood
+        else {
+            return false
+        }
+        
+        // Factor validation (optional)
+        for factor in summary.mostFrequentFactors {
+            // Just ensure the factor has a non-empty name
+            if factor.factor.isEmpty {
+                return false
+            }
+        }
+        
+        return true
+    }
+}
