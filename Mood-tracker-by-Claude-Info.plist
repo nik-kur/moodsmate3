@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    <key>CLIENT_ID</key>
+    <string>885029497833-t7rejuck18a6aa1ilq0uqp769h339jrt.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.885029497833-t7rejuck18a6aa1ilq0uqp769h339jrt</string>
+    <key>API_KEY</key>
+    <string>AIzaSyBTCPWAWSQDF_i_uSw2UqafPq5r_y4aFB4</string>
+    <key>GCM_SENDER_ID</key>
+    <string>885029497833</string>
+    <key>PLIST_VERSION</key>
+    <string>1</string>
+    <key>BUNDLE_ID</key>
+    <string>com.nkapps.moodsmate</string>
+    <key>PROJECT_ID</key>
+    <string>mood-tracker-6f19b</string>
+    <key>STORAGE_BUCKET</key>
+    <string>mood-tracker-6f19b.firebasestorage.app</string>
+    <key>IS_ADS_ENABLED</key>
+    <false/>
+    <key>IS_ANALYTICS_ENABLED</key>
+    <false/>
+    <key>IS_APPINVITE_ENABLED</key>
+    <true/>
+    <key>IS_GCM_ENABLED</key>
+    <true/>
+    <key>IS_SIGNIN_ENABLED</key>
+    <true/>
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+    <key>FirebaseAutomaticScreenReportingEnabled</key>
+    <false/>
+    <key>GOOGLE_APP_ID</key>
+    <string>1:885029497833:ios:96304602f077b9b9b9b978</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Authenticate and securely access your Mood Tracker account using your device&apos;s biometric authentication</string>
+    <key>GIDSignInRedirectSchemePrefix</key>
+    <string>com.googleusercontent.apps</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.nkapps.moodsmate</string>
+                <string>com.googleusercontent.apps.885029497833-965ki1lkou43o421k1pq77rae2mund5i</string>
+            </array>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>apple-sign-in</string>
+        </dict>
+    </array>
+    <key>UIRequiresFullScreen</key>
+    <true/>
+
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+        <key>UISceneConfigurations</key>
+        <dict>
+            <key>UIWindowSceneSessionRoleApplication</key>
+            <array>
+                <dict>
+                    <key>UISceneConfigurationName</key>
+                    <string>Default Configuration</string>
+                    <key>UISceneDelegateClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
+    
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+
+    <key>UIApplicationSupportsMultipleScenes</key>
+    <false/>
+</dict>
+</plist>
