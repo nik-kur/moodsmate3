@@ -39,6 +39,7 @@ struct HomeView: View {
     @State private var selectedInfoFactor: String? = nil
     @State private var showingFactorInfo = false
     @StateObject private var networkMonitor = NetworkMonitor()
+    @State private var showDebugMenu = false
     
     private let colors = (
         background: Color(UIColor.systemBackground),
@@ -81,6 +82,7 @@ struct HomeView: View {
     }
     
     var body: some View {
+        
             if !networkMonitor.isConnected {
                 OfflineView()
             } else {
@@ -321,7 +323,16 @@ struct HomeView: View {
                             } message: {
                                 Text("You've already logged your mood today. Do you want to replace the existing entry?")
                             }
+                            .onLongPressGesture(minimumDuration: 3) {
+                                // Triple-tap will toggle the debug menu
+                                showDebugMenu = true
+                            }
+                            .sheet(isPresented: $showDebugMenu) {
+                                DebugMenuView(viewModel: viewModel)
+                            }
                         }
+
+        
                     }
     
     
