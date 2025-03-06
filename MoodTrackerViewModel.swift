@@ -89,6 +89,7 @@ struct WeeklyAverageEntry: Identifiable {
 
 final class MoodTrackerViewModel: ObservableObject {
    
+    static var shared: MoodTrackerViewModel?
     // Published properties for UI
     @Published var moodLevel: Double = 5.0
     @Published var currentScreen: AppScreen = .home
@@ -104,7 +105,10 @@ final class MoodTrackerViewModel: ObservableObject {
     public let weeklyReviewManager: WeeklyReviewManager
        
     init() {
+        
         self.weeklyReviewManager = WeeklyReviewManager()
+        
+        MoodTrackerViewModel.shared = self
         
         // Add observer for weeklyReviewManager's properties
         weeklyReviewManager.$currentReview
